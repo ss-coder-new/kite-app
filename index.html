@@ -6,12 +6,14 @@
 </head>
 <body>
   <h1>Kite Connect Redirect</h1>
-  <p>Login successful. Copy your request_token below:</p>
   <script>
     const params = new URLSearchParams(window.location.search);
     const token = params.get("request_token");
     if (token) {
       document.body.innerHTML += `<p><strong>Request Token:</strong> ${token}</p>`;
+      navigator.clipboard.writeText(token).then(() => {
+        document.body.innerHTML += `<p>(Copied to clipboard ✅)</p>`;
+      });
     } else {
       document.body.innerHTML += `<p>No request_token found in URL.</p>`;
     }
